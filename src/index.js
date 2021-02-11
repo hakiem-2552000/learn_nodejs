@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({extended : true}));
 
 app.get('/',(request, response)=>{
     response.status(200);
-    response.send('Hello world');
+    response.send('Happy lunar new year');
 });
 
 app.post('/signup',(request, response)=>{
