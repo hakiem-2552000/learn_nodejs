@@ -7,7 +7,7 @@ var server = http.createServer(function (request, response) {
     response.writeHead(200, {
         'Content-Type': 'text/html'
     });
-    response.write('IP address: ' + request.socket.remoteAddress);
+    response.write('HAPPY LUNAR NEW YEAR\n');
     response.end();
 }).listen(port);
 
