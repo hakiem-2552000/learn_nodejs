@@ -1,14 +1,41 @@
-'use strict';
+const server = require('http').createServer()
+const io = require('socket.io')(server)
 
-var http = require('http');
-var port = 3001;
+io.on('connection', function (client) {
 
-var server = http.createServer(function (request, response) {
-    response.writeHead(200, {
-        'Content-Type': 'text/html'
-    });
-    response.write('HAPPY LUNAR NEW YEAR\n');
-    response.end();
-}).listen(port);
+  console.log('client connect...', client.id);
 
-console.log('Server is running on port: ' + port);
+  client.on('typing', function name(data) {
+    console.log(data);
+    io.emit('typing', data)
+  })
+
+  client.on('message', function name(data) {
+    console.log(data);
+    io.emit('message', data)
+  })
+
+  client.on('location', function name(data) {
+    console.log(data);
+    io.emit('location', data);
+  })
+
+  client.on('connect', function () {
+  })
+
+  client.on('disconnect', function () {
+    console.log('client disconnect...', client.id)
+    // handleDisconnect()
+  })
+
+  client.on('error', function (err) {
+    console.log('received error from client:', client.id)
+    console.log(err)
+  })
+})
+
+var server_port = process.env.PORT || 8080;
+server.listen(server_port, function (err) {
+  if (err) throw err
+  console.log('Listening on port %d', server_port);
+});
