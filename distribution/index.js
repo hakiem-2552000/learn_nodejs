@@ -1,5 +1,7 @@
 const server = require('http').createServer()
 const io = require('socket.io')(server)
+const express = require('express');
+const app = express();
 
 io.on('connection', function (client) {
 
@@ -36,9 +38,8 @@ io.on('connection', function (client) {
 
 app.get('/',(request, response)=>{
     response.status(200);
-    response.send('Server is running');
+    response.send('Happy lunar new year');
 });
-
 var server_port = process.env.PORT || 8080;
 server.listen(server_port, function (err) {
   if (err) throw err
