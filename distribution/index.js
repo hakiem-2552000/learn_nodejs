@@ -34,6 +34,11 @@ io.on('connection', function (client) {
   })
 })
 
+app.get('/',(request, response)=>{
+    response.status(200);
+    response.send('Server is running');
+});
+
 var server_port = process.env.PORT || 8080;
 server.listen(server_port, function (err) {
   if (err) throw err
