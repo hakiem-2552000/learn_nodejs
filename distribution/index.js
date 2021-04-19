@@ -2,9 +2,15 @@ const server = require('http').createServer()
 const io = require('socket.io')(server)
 const express = require('express');
 const app = express();
+var server_port = process.env.PORT || 8080;
+
+app.get('/',(request, response)=>{
+  response.status(200);
+  response.send('Happy lunar new year');
+});
+
 
 io.on('connection', function (client) {
-
   console.log('client connect...', client.id);
 
   client.on('typing', function name(data) {
@@ -36,12 +42,5 @@ io.on('connection', function (client) {
   })
 })
 
-app.get('/',(request, response)=>{
-    response.status(200);
-    response.send('Happy lunar new year');
-});
-var server_port = process.env.PORT || 8080;
-server.listen(server_port, function (err) {
-  if (err) throw err
-  console.log('Listening on port %d', server_port);
-});
+console.log('Running on port:'+ server_port);
+app.listen(server_port);
