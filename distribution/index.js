@@ -40,7 +40,7 @@ app.get('/',(request, response)=>{
     response.status(200);
     response.send('Happy lunar new year');
 });
-var server_port = process.env.PORT || 3001;
+var server_port = process.env.PORT || 8080;
 server.listen(server_port, function (err) {
   if (err) throw err
   console.log('Listening on port %d', server_port);
